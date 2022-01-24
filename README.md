@@ -31,11 +31,39 @@ function, you can visit these two link https://docs.opencv.org/3.4/de/d25/imgpro
 After we know how to describe color, we need to know how to handle color. Now, consider a question. If we only want to see the specific color in an image, what should we do?  The asnwer is let just watch this specific color. I know this sounds like crap, but it indeed what we will do in the program. We already know the properties of the color we want, and then we can set a window or bound so that our camera can only look for colors within this range. In order to do this, we need to use another funcion inlcude in `cv2` libray called `inRange(src, lower_bound, upper_bound)`. If you want to know more information about this function, please visit https://docs.opencv.org/3.4/da/d97/tutorial_threshold_inRange.html.  After you make the package, in the `src` folder, there is a simple python file whcih shows how to convert an image from RGB to HSV and fliter color, called `fliter.py`.
 
 
+### Feature Matching
+
+A feature is a meaningful area of an image that is unique or easily identifiable. Corners and high-density regions are a good feature, edges can divide the image into two regions, so they can be regarded as good features, and [blobs (image regions that are very different from surrounding areas)](https://towardsdatascience.com/image-processing-blob-detection-204dc6428dd) are also meaningful features.
+
+Usually, our processing of features is divided into three parts, Detection, Description and Matching. [There is detailed introduction to feature detection and matching here, very helpful to read.](https://medium.com/data-breach/introduction-to-feature-detection-and-matching-65e27179885d)
+
+#### Working with Feature matching is pretty straightforward. In general, we need to follow some steps:
+1. Identify Points of Interest. (Features)
+2. Describe the point of interest, describing its surrounding. The idea of this step is to make the algorithm robust to image transformations, like plane rotation, illumination changes, scale variations, etc.
+3. Matching. This is where you want to compare the features of your object with the ones in other images, searching for similarities between them.
+
+#### We recommend trying the following feature detectors and descriptors. 
+We do not restrict students to use any detectors and algorithms. Also, encourage students to explore other detectors and algorithms, but please make sure to only use the detectors and matching algorithms from the OpenCV library, other CV libraries will not be accepted.
+
+#### Feature detectors and descriptors:
+- [FAST (Features from Accelerated Segment Test)](https://docs.opencv.org/4.x/df/d0c/tutorial_py_fast.html)
+- [BRIEF (Binary Robust Independent Elementary Features)](https://docs.opencv.org/4.x/dc/d7d/tutorial_py_brief.html)
+- [ORB (Oriented FAST and Rotated BRIEF)](https://docs.opencv.org/4.x/d1/d89/tutorial_py_orb.html)
+- [SIFT (Scale-Invariant Feature Transform)](https://docs.opencv.org/4.x/da/df5/tutorial_py_sift_intro.html)
+
+#### Feature matching algorithms:
+- [BF (Brute-Force) Matcher](https://opencv24-python-tutorials.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_matcher/py_matcher.html#basics-of-brute-force-matcher)
+- [FLANN (Fast Library for Approximate Nearest Neighbors) Matcher](https://opencv24-python-tutorials.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_matcher/py_matcher.html#flann-based-matcher)
+
+More details and examples in the tutorial link. <br />
+**Hint:** Try different combinations of detectors and matching algorithms, and choosing the right hyperparameters can be useful.
+
+
 # Task 
 
 In this lab, students need to let their robot move along with the track on the ground, and stop after their robot seeing stop sign. 
 
-track is splited in differents color.
+Track is splited in differents color.
 
 Whtie track is normal track. 
 
@@ -46,13 +74,12 @@ Green tracks is a shortcut, you should let your robot change track from white to
 Red track is the deceleration zone where the speed of robot will decrease and stop before moving out from the zone.
 
 # Grading
-40%, turtlebot can completely follow the entire path, which is the turtlebot able to follow the WHITE line perfectly.
+**40%**, Turtlebot can completely follow the entire path, which is the turtlebot able to follow the WHITE line perfectly.
 
-20%, the GREEN line (shortcut) can be filtering, and passed completely. (Hardest part, because incorrect timing of switching color filters will cause the robot to walk back along the white line)
+**20%**, GREEN line (shortcut) can be filtering, and passed completely. (Hardest part, because incorrect timing of switching color filters will cause the robot to walk back along the white line)
 
-10%, the BLUE line (acceleration band) can be filtering, and passed completely by increasing half speed (1.5x).
+**10%**, BLUE line (acceleration band) can be filtering, and passed completely by increasing half speed (1.5x).
 
-10%, the Red floor tiles (speed bumps) can be filtering, and slowed down by a half speed (0.5x), then start matching Stop-Sign icon.
+**10%**, Red floor tiles (speed bumps) can be filtering, and slowed down by a half speed (0.5x), then start matching Stop-Sign icon.
 
-20%, Turtlebot can effectively match the Stop-Sign icon, and should stopeed before passed red area.
-
+**20%**, Turtlebot can effectively match the Stop-Sign icon, and should stopeed before passed red area.
