@@ -75,7 +75,7 @@ Green tracks is a shortcut, you should let your robot change track from white to
 
 Red track is the deceleration zone where the speed of robot will decrease and stop before moving out from the zone.
 
-![image](https://github.com/TheOnlyMiki/CMPUT-412-Lab-3-OpenCV-Test/blob/main/simple.png?raw=true)
+![image](https://github.com/TheOnlyMiki/CMPUT-412-Lab-3-OpenCV-Test/blob/main/simple.png?raw=true | width=70)
 
 # Grading
 **40%**, Turtlebot can completely follow the entire path, which is the turtlebot able to follow the WHITE line perfectly.
